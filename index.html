@@ -1,0 +1,54 @@
+# Create the HTML structure for the interactive stocktake form
+html_content = """
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Stocktake Form - Sushi Restaurant</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; background-color: #f4f4f9; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; background: white; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+        th { background-color: #333; color: white; }
+        .section-header { background-color: #e0e0e0; font-weight: bold; }
+        input[type="number"] { width: 60px; padding: 5px; }
+        button { padding: 10px 20px; background-color: #28a745; color: white; border: none; cursor: pointer; border-radius: 5px; }
+        button:hover { background-color: #218838; }
+    </style>
+</head>
+<body>
+
+<h2>Interactive Stocktake Form</h2>
+<form id="stocktakeForm">
+    <table>
+        <thead>
+            <tr>
+                <th>Items</th>
+                <th>Prep (Front)</th>
+                <th>Back Fridge</th>
+                <th>Freezers</th>
+                <th>Order</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="section-header"><td colspan="5">NIGIRI SECTION</td></tr>
+            <tr><td>Salmon Nigiri</td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td></tr>
+            <tr><td>Salmon Belly</td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td></tr>
+            
+            <tr class="section-header"><td colspan="5">ROLL SECTION</td></tr>
+            <tr><td>Tuna Soy (Roll)</td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td></tr>
+            <tr><td>Salmon (Roll)</td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td></tr>
+            
+            </tbody>
+    </table>
+    <button type="button" onclick="alert('ฟอร์มบันทึกแล้ว!')">บันทึกข้อมูล</button>
+</form>
+
+</body>
+</html>
+"""
+
+# Save to file
+with open("stocktake_form.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
