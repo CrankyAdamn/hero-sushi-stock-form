@@ -1,54 +1,61 @@
-# Create the HTML structure for the interactive stocktake form
-html_content = """
 <!DOCTYPE html>
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Stocktake Form - Sushi Restaurant</title>
+    <title>Smart Sushi Stocktake</title>
     <style>
-        body { font-family: sans-serif; margin: 20px; background-color: #f4f4f9; }
-        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; background: white; }
-        th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
-        th { background-color: #333; color: white; }
-        .section-header { background-color: #e0e0e0; font-weight: bold; }
-        input[type="number"] { width: 60px; padding: 5px; }
-        button { padding: 10px 20px; background-color: #28a745; color: white; border: none; cursor: pointer; border-radius: 5px; }
-        button:hover { background-color: #218838; }
+        body { font-family: 'Arial', sans-serif; background-color: #f0f8ff; padding: 10px; }
+        table { width: 100%; border-collapse: collapse; background: white; }
+        th { background-color: #add8e6; padding: 10px; border: 1px solid #ccc; text-align: center; }
+        td { padding: 5px; border: 1px solid #ddd; text-align: center; }
+        .section-header { background-color: #d3d3d3; font-weight: bold; text-align: left; padding: 10px; }
+        .order-col { background-color: #ffc0cb; font-weight: bold; }
+        input { width: 50px; text-align: center; }
+        button { margin-top: 20px; padding: 15px; width: 100%; background-color: #4CAF50; color: white; border: none; font-size: 16px; cursor: pointer; }
     </style>
 </head>
 <body>
 
-<h2>Interactive Stocktake Form</h2>
-<form id="stocktakeForm">
+<h2>Sushi Stocktake (Smart Mode)</h2>
+<form id="stockForm">
     <table>
         <thead>
             <tr>
                 <th>Items</th>
-                <th>Prep (Front)</th>
-                <th>Back Fridge</th>
-                <th>Freezers</th>
-                <th>Order</th>
+                <th>Prep</th>
+                <th>Fridge</th>
+                <th>Freezer</th>
+                <th>Expected</th>
+                <th class="order-col">Order</th>
             </tr>
         </thead>
         <tbody>
-            <tr class="section-header"><td colspan="5">NIGIRI SECTION</td></tr>
-            <tr><td>Salmon Nigiri</td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td></tr>
-            <tr><td>Salmon Belly</td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td></tr>
-            
-            <tr class="section-header"><td colspan="5">ROLL SECTION</td></tr>
-            <tr><td>Tuna Soy (Roll)</td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td></tr>
-            <tr><td>Salmon (Roll)</td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td><td><input type="number"></td></tr>
-            
+            <tr class="section-header"><td colspan="6">NIGIRI SECTION</td></tr>
+            <tr>
+                <td>Salmon Nigiri</td>
+                <td><input type="number" class="calc" data-expected="30"></td>
+                <td><input type="number" class="calc"></td>
+                <td><input type="number" class="calc"></td>
+                <td>30</td>
+                <td class="order-col"><span class="result">0</span></td>
+            </tr>
             </tbody>
     </table>
-    <button type="button" onclick="alert('ฟอร์มบันทึกแล้ว!')">บันทึกข้อมูล</button>
+    <button type="button" onclick="calculateOrder()">คำนวณรายการสั่งซื้อ</button>
 </form>
+
+<script>
+    function calculateOrder() {
+        const rows = document.querySelectorAll('tbody tr:not(.section-header)');
+        rows.forEach(row => {
+            const inputs = row.querySelectorAll('.calc');
+            const expected = parseInt(row.querySelector('td:nth-child(5)').innerText) || 0;
+            const stock = Array.from(inputs).reduce((sum, input) => sum + (parseInt(input.value) || 0), 0);
+            const order = Math.max(0, expected - stock);
+            row.querySelector('.result').innerText = order;
+        });
+    }
+</script>
 
 </body>
 </html>
-"""
-
-# Save to file
-with open("stocktake_form.html", "w", encoding="utf-8") as f:
-    f.write(html_content)
