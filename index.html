@@ -5,69 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stocktake Form | Hero Sushi Tuggerah</title>
     <style>
-        /* Apple-style Font & Reset */
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #ffffff; 
-            color: #1d1d1f; 
-            margin: 0; 
-            padding: 40px 20px; 
-            line-height: 1.47059;
-        }
-
-        /* Header Container - Right Aligned */
-        .header-container { 
-            text-align: right; 
-            margin-bottom: 60px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .main-title { 
-            color: #1d1d1f; 
-            font-size: 32px; 
-            font-weight: 600; 
-            letter-spacing: -0.003em;
-            margin: 0; 
-        }
-
-        .sub-title { 
-            color: #86868b; /* Apple's secondary text color */
-            font-size: 14px; 
-            margin: 4px 0 0 0; 
-            font-weight: 400;
-        }
-
-        /* Rest of the table styles remain clean */
-        table { width: 100%; max-width: 800px; margin: 0 auto 40px auto; border-collapse: collapse; }
-        th { background-color: #f5f5f7; padding: 12px; border-bottom: 1px solid #d2d2d7; text-align: center; font-weight: 500; }
-        td { padding: 12px; border-bottom: 1px solid #f5f5f7; text-align: center; }
-        .order-col { background-color: #fff9fa; font-weight: bold; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #ffffff; color: #1d1d1f; margin: 0; padding: 40px 20px; line-height: 1.47; }
         
-        button { 
-            display: block;
-            margin: 0 auto;
-            padding: 12px 24px; 
-            background-color: #0071e3; /* Apple Blue */
-            color: white; 
-            border: none; 
-            border-radius: 980px; /* Pill shape */
-            font-size: 17px; 
-            cursor: pointer; 
-            transition: background 0.3s;
-        }
-        button:hover { background-color: #0077ed; }
+        .header-container { text-align: right; margin-bottom: 40px; max-width: 800px; margin-left: auto; margin-right: auto; }
+        
+        /* ปรับขนาดฟอนต์ให้เล็กลง และสีแดงสำหรับ | */
+        .main-title { color: #1d1d1f; font-size: 24px; font-weight: 600; margin: 0; }
+        .separator { color: #d63384; font-weight: bold; margin: 0 5px; }
+        .sub-title { color: #86868b; font-size: 14px; margin: 4px 0 0 0; }
+        
+        table { width: 100%; max-width: 800px; margin: 0 auto 40px auto; border-collapse: collapse; }
+        th { background-color: #f5f5f7; padding: 12px; border-bottom: 1px solid #d2d2d7; text-align: center; font-weight: 500; font-size: 14px; }
+        td { padding: 10px; border-bottom: 1px solid #f5f5f7; text-align: center; font-size: 14px; }
+        .section-header { background-color: #f5f5f7; font-weight: 600; text-align: left; padding: 15px; }
+        .order-col { background-color: #fff9fa; font-weight: bold; color: #d63384; }
+        input { width: 50px; text-align: center; border: 1px solid #d2d2d7; border-radius: 5px; padding: 5px; }
+        button { display: block; margin: 0 auto; padding: 12px 24px; background-color: #0071e3; color: white; border: none; border-radius: 980px; font-size: 17px; cursor: pointer; }
     </style>
 </head>
 <body>
 
 <div class="header-container">
-    <h1 class="main-title">Stocktake Form | Hero Sushi Tuggerah</h1>
+    <h1 class="main-title">Stocktake Form <span class="separator">|</span> Hero Sushi Tuggerah</h1>
     <p class="sub-title">By Adam</p>
 </div>
 
-<!-- ... ส่วนของตารางคงเดิม ... -->
+<form id="stockForm">
+    <table>
+        <thead>
+            <tr>
+                <th>Items</th>
+                <th>Prep</th>
+                <th>Fridge</th>
+                <th>Freezer</th>
+                <th>Expected</th>
+                <th class="order-col">Order</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="section-header"><td colspan="6">NIGIRI SECTION</td></tr>
+            <tr><td>Salmon Nigiri</td><td><input type="number" class="calc" data-expected="30"></td><td><input type="number" class="calc"></td><td><input type="number" class="calc"></td><td>30</td><td class="order-col"><span class="result">0</span></td></tr>
+            <tr><td>Salmon Sashimi</td><td><input type="number" class="calc" data-expected="12"></td><td><input type="number" class="calc"></td><td><input type="number" class="calc"></td><td>12</td><td class="order-col"><span class="result">0</span></td></tr>
+            
+            <tr class="section-header"><td colspan="6">ROLL SECTION</td></tr>
+            <tr><td>Tuna Soy (Roll)</td><td><input type="number" class="calc" data-expected="10"></td><td><input type="number" class="calc"></td><td><input type="number" class="calc"></td><td>10</td><td class="order-col"><span class="result">0</span></td></tr>
+            
+            <tr class="section-header"><td colspan="6">VEGE SECTION</td></tr>
+            <tr><td>Avocado</td><td><input type="number" class="calc" data-expected="8"></td><td><input type="number" class="calc"></td><td><input type="number" class="calc"></td><td>8</td><td class="order-col"><span class="result">0</span></td></tr>
+        </tbody>
+    </table>
+    <button type="button" onclick="calculateOrder()">Calculate Order</button>
+</form>
+
+<script>
+    function calculateOrder() {
+        const rows = document.querySelectorAll('tbody tr:not(.section-header)');
+        rows.forEach(row => {
+            const inputs = row.querySelectorAll('.calc');
+            const expected = parseInt(row.querySelector('td:nth-child(5)').innerText) || 0;
+            const stock = Array.from(inputs).reduce((sum, input) => sum + (parseInt(input.value) || 0), 0);
+            const order = Math.max(0, expected - stock);
+            row.querySelector('.result').innerText = order;
+        });
+    }
+</script>
 
 </body>
 </html>
