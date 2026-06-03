@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Smart Sushi Stocktake</title>
+    <title>Stocktake Form | Hero Sushi Tuggerah</title>
     <style>
         body { font-family: 'Arial', sans-serif; background-color: #f0f8ff; padding: 10px; }
+        
+        /* Header styling */
+        .header-container { text-align: right; margin-bottom: 20px; }
+        .main-title { color: #1d1d1f; font-size: 24px; font-weight: bold; margin: 0; }
+        .sub-title { color: #e6e6e6; font-size: 12px; margin: 0; background-color: #333; display: inline-block; padding: 2px 5px; }
+
         table { width: 100%; border-collapse: collapse; background: white; }
         th { background-color: #add8e6; padding: 10px; border: 1px solid #ccc; text-align: center; }
         td { padding: 5px; border: 1px solid #ddd; text-align: center; }
@@ -16,7 +22,11 @@
 </head>
 <body>
 
-<h2>Sushi Stocktake (Smart Mode)</h2>
+<div class="header-container">
+    <h1 class="main-title">Stocktake Form | Hero Sushi Tuggerah</h1>
+    <p class="sub-title">By Adam</p>
+</div>
+
 <form id="stockForm">
     <table>
         <thead>
@@ -39,9 +49,10 @@
                 <td>30</td>
                 <td class="order-col"><span class="result">0</span></td>
             </tr>
-            </tbody>
+            <!-- Add more rows here -->
+        </tbody>
     </table>
-    <button type="button" onclick="calculateOrder()">คำนวณรายการสั่งซื้อ</button>
+    <button type="button" onclick="calculateOrder()">Calculate Order</button>
 </form>
 
 <script>
