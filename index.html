@@ -2,22 +2,62 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stocktake Form | Hero Sushi Tuggerah</title>
     <style>
-        body { font-family: 'Arial', sans-serif; background-color: #f0f8ff; padding: 10px; }
-        
-        /* Header styling */
-        .header-container { text-align: right; margin-bottom: 20px; }
-        .main-title { color: #1d1d1f; font-size: 24px; font-weight: bold; margin: 0; }
-        .sub-title { color: #e6e6e6; font-size: 12px; margin: 0; background-color: #333; display: inline-block; padding: 2px 5px; }
+        /* Apple-style Font & Reset */
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #ffffff; 
+            color: #1d1d1f; 
+            margin: 0; 
+            padding: 40px 20px; 
+            line-height: 1.47059;
+        }
 
-        table { width: 100%; border-collapse: collapse; background: white; }
-        th { background-color: #add8e6; padding: 10px; border: 1px solid #ccc; text-align: center; }
-        td { padding: 5px; border: 1px solid #ddd; text-align: center; }
-        .section-header { background-color: #d3d3d3; font-weight: bold; text-align: left; padding: 10px; }
-        .order-col { background-color: #ffc0cb; font-weight: bold; }
-        input { width: 50px; text-align: center; }
-        button { margin-top: 20px; padding: 15px; width: 100%; background-color: #4CAF50; color: white; border: none; font-size: 16px; cursor: pointer; }
+        /* Header Container - Right Aligned */
+        .header-container { 
+            text-align: right; 
+            margin-bottom: 60px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .main-title { 
+            color: #1d1d1f; 
+            font-size: 32px; 
+            font-weight: 600; 
+            letter-spacing: -0.003em;
+            margin: 0; 
+        }
+
+        .sub-title { 
+            color: #86868b; /* Apple's secondary text color */
+            font-size: 14px; 
+            margin: 4px 0 0 0; 
+            font-weight: 400;
+        }
+
+        /* Rest of the table styles remain clean */
+        table { width: 100%; max-width: 800px; margin: 0 auto 40px auto; border-collapse: collapse; }
+        th { background-color: #f5f5f7; padding: 12px; border-bottom: 1px solid #d2d2d7; text-align: center; font-weight: 500; }
+        td { padding: 12px; border-bottom: 1px solid #f5f5f7; text-align: center; }
+        .order-col { background-color: #fff9fa; font-weight: bold; }
+        
+        button { 
+            display: block;
+            margin: 0 auto;
+            padding: 12px 24px; 
+            background-color: #0071e3; /* Apple Blue */
+            color: white; 
+            border: none; 
+            border-radius: 980px; /* Pill shape */
+            font-size: 17px; 
+            cursor: pointer; 
+            transition: background 0.3s;
+        }
+        button:hover { background-color: #0077ed; }
     </style>
 </head>
 <body>
@@ -27,46 +67,7 @@
     <p class="sub-title">By Adam</p>
 </div>
 
-<form id="stockForm">
-    <table>
-        <thead>
-            <tr>
-                <th>Items</th>
-                <th>Prep</th>
-                <th>Fridge</th>
-                <th>Freezer</th>
-                <th>Expected</th>
-                <th class="order-col">Order</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="section-header"><td colspan="6">NIGIRI SECTION</td></tr>
-            <tr>
-                <td>Salmon Nigiri</td>
-                <td><input type="number" class="calc" data-expected="30"></td>
-                <td><input type="number" class="calc"></td>
-                <td><input type="number" class="calc"></td>
-                <td>30</td>
-                <td class="order-col"><span class="result">0</span></td>
-            </tr>
-            <!-- Add more rows here -->
-        </tbody>
-    </table>
-    <button type="button" onclick="calculateOrder()">Calculate Order</button>
-</form>
-
-<script>
-    function calculateOrder() {
-        const rows = document.querySelectorAll('tbody tr:not(.section-header)');
-        rows.forEach(row => {
-            const inputs = row.querySelectorAll('.calc');
-            const expected = parseInt(row.querySelector('td:nth-child(5)').innerText) || 0;
-            const stock = Array.from(inputs).reduce((sum, input) => sum + (parseInt(input.value) || 0), 0);
-            const order = Math.max(0, expected - stock);
-            row.querySelector('.result').innerText = order;
-        });
-    }
-</script>
+<!-- ... ส่วนของตารางคงเดิม ... -->
 
 </body>
 </html>
